@@ -79,9 +79,6 @@ IO_PORT "rst_n" PULL_MODE=UP;
 IO_LOC  "uio_out[4]" 81;
 IO_PORT "uio_out[4]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
 
-IO_LOC  "clk" 52;
-IO_PORT "clk" IO_TYPE=LVCMOS33 PULL_MODE=UP;
-
 IO_LOC  "uio_out[5]" 82;
 IO_PORT "uio_out[5]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
 
@@ -126,3 +123,6 @@ IO_PORT "ui_in[0]" IO_TYPE=LVCMOS18;
 
 IO_LOC  "ui_in[1]" 4;
 IO_PORT "ui_in[1]" IO_TYPE=LVCMOS18;
+
+IO_LOC  "clk" 52;
+IO_PORT "clk" IO_TYPE=LVCMOS33 PULL_MODE=UP;
