@@ -15,6 +15,8 @@ module tt_um_multiplexed_clock (
 //localparam FRECUENCY = (27000000 + 253);
 //Frecuency for tinyTapeout
 localparam FRECUENCY = (32768);
+localparam MULTIPLEX_TIME = FRECUENCY/1000;
+localparam DEBOUNCE_TIME = MULTIPLEX_TIME*8;
 wire reset = !rst_n;
 assign uio_oe = 8'b11111111;
 
@@ -129,7 +131,7 @@ if (clock_counter == FRECUENCY) begin
 end
 
 millis_counter <= millis_counter + 1;
-if (millis_counter == (FRECUENCY/1000)) begin
+if (millis_counter == MULTIPLEX_TIME) begin
 	millis_counter <= 0;
 	selector_output <= (selector_output << 1) | (selector_output >> (4 - 1));
 end
@@ -183,14 +185,14 @@ seg7 seg7(
 .segments(segments)
 );
 
-debouncer #((FRECUENCY/1000) * 8) minutes_increase(
+debouncer #(DEBOUNCE_TIME) minutes_increase(
 .clk(clk),
 .reset(0),
 .in(!btn1),
 .out(adj_min_pulse)
 );
 
-debouncer #((FRECUENCY/1000) * 8) hours_increase(
+debouncer #(DEBOUNCE_TIME) hours_increase(
 .clk(clk),
 .reset(0),
 .in(!btn2),
@@ -231,10 +233,10 @@ input in,
 output out
 );
 
-reg [32 : 0] counter;
+reg [26 : 0] counter;
 
 always @(posedge clk) begin
-if (reset | | !in) begin
+if (reset || !in) begin
 	counter <= 0;
 end else begin
 if (counter < MAX_COUNT) begin
