@@ -1,0 +1,7 @@
+{
+    "name": "clock_divider",
+    "includedFiles": ["tt_simple_clock.v"],
+    "testBenches": ["tt_simple_clock_test.v"],
+    "constraintsFile": "Constraints_tang_nano.cst",
+    "top": "tang_nano"
+}
