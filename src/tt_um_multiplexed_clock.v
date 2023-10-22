@@ -48,18 +48,18 @@ assign uo_out[7] = (negateSegments) ? ~point_led : point_led;
 
 wire adj_min_pulse, adj_hrs_pulse;
 
-wire point_led;
-wire [6 : 0] segments;
+reg point_led;
+reg [6 : 0] segments;
 
-wire [3 : 0] bufferCounter;
-wire pulseSeconds;
-wire pulseMinutes;
+reg [3 : 0] bufferCounter;
+reg pulseSeconds;
+reg pulseMinutes;
 
 reg [3 : 0] min_u;
 reg [3 : 0] min_d;
 reg [3 : 0] hrs_u;
 reg [3 : 0] hrs_d;
-reg [4 : 0] time_leds;
+reg [3 : 0] time_leds;
 reg pressed_min;
 reg pressed_hrs;
 reg [25 : 0] clock_counter;
@@ -116,7 +116,7 @@ if (hrs_u == 10) begin
 	hrs_d <= hrs_d + 1;
 end
 
-if (hrs_d == 2 & & hrs_u == 4) begin
+if (hrs_d == 2 && hrs_u == 4) begin
 	hrs_u <= 0;
 	hrs_d <= 0;
 end
@@ -134,23 +134,23 @@ if (millis_counter == (FRECUENCY/1000)) begin
 	selector_output <= (selector_output << 1) | (selector_output >> (4 - 1));
 end
 
-if (adj_min_pulse & & pressed_min == 0) begin
+if (adj_min_pulse && pressed_min == 0) begin
 	min_u <= min_u + 1;
 	pressed_min <= 1;
 	time_leds <= 0;
 	sec_counter <= 0;
 end
-else if (adj_min_pulse == 0 & & pressed_min == 1) begin
+else if (adj_min_pulse == 0 && pressed_min == 1) begin
 pressed_min <= 0;
 end
 
-if (adj_hrs_pulse & & pressed_hrs == 0) begin
+if (adj_hrs_pulse && pressed_hrs == 0) begin
 	hrs_u <= hrs_u + 1;
 	pressed_hrs <= 1;
 	time_leds <= 0;
 	sec_counter <= 0;
 end
-else if (adj_hrs_pulse == 0 & & pressed_hrs == 1) begin
+else if (adj_hrs_pulse == 0 && pressed_hrs == 1) begin
 pressed_hrs <= 0;
 end
 end
@@ -231,7 +231,7 @@ input in,
 output out
 );
 
-reg [25 : 0] counter;
+reg [32 : 0] counter;
 
 always @(posedge clk) begin
 if (reset | | !in) begin
