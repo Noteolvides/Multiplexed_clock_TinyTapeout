@@ -100,7 +100,7 @@ if (sec_counter == 60) begin
 	sec_counter <= 0;
 	time_leds <= 0;
 	min_u <= min_u + 1;
-	pulseMinutes = ~pulseMinutes;
+	pulseMinutes <= ~pulseMinutes;
 end
 
 if (min_u == 10) begin
@@ -127,7 +127,7 @@ clock_counter <= clock_counter + 1;
 if (clock_counter == FRECUENCY) begin
 	clock_counter <= 0;
 	sec_counter <= sec_counter + 1;
-	pulseSeconds = ~pulseSeconds;
+	pulseSeconds <= ~pulseSeconds;
 end
 
 millis_counter <= millis_counter + 1;
@@ -187,14 +187,14 @@ seg7 seg7(
 
 debouncer #(DEBOUNCE_TIME) minutes_increase(
 .clk(clk),
-.reset(0),
+.reset(reset),
 .in(!btn1),
 .out(adj_min_pulse)
 );
 
 debouncer #(DEBOUNCE_TIME) hours_increase(
 .clk(clk),
-.reset(0),
+.reset(reset),
 .in(!btn2),
 .out(adj_hrs_pulse)
 );
@@ -233,7 +233,7 @@ input in,
 output out
 );
 
-reg [26 : 0] counter;
+reg [32 : 0] counter;
 
 always @(posedge clk) begin
 if (reset || !in) begin
