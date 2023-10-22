@@ -1,53 +1,128 @@
-IO_LOC  "reset_n" 63;
-IO_PORT "reset_n" PULL_MODE=UP;
+IO_LOC  "ena" 48;
+IO_PORT "ena" IO_TYPE=LVCMOS33;
 
-IO_LOC  "clockCheck2" 81;
-IO_PORT "clockCheck2" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+IO_LOC  "uio_oe[7]" 57;
+IO_PORT "uio_oe[7]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_oe[6]" 56;
+IO_PORT "uio_oe[6]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_oe[5]" 55;
+IO_PORT "uio_oe[5]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_oe[4]" 54;
+IO_PORT "uio_oe[4]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_oe[3]" 53;
+IO_PORT "uio_oe[3]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_oe[2]" 51;
+IO_PORT "uio_oe[2]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_oe[1]" 42;
+IO_PORT "uio_oe[1]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_oe[0]" 41;
+IO_PORT "uio_oe[0]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_out[7]" 79;
+IO_PORT "uio_out[7]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_out[6]" 80;
+IO_PORT "uio_out[6]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_in[7]" 35;
+IO_PORT "uio_in[7]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_in[6]" 40;
+IO_PORT "uio_in[6]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_in[5]" 34;
+IO_PORT "uio_in[5]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_in[4]" 33;
+IO_PORT "uio_in[4]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_in[3]" 30;
+IO_PORT "uio_in[3]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_in[2]" 29;
+IO_PORT "uio_in[2]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_in[1]" 28;
+IO_PORT "uio_in[1]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "uio_in[0]" 27;
+IO_PORT "uio_in[0]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "ui_in[7]" 26;
+IO_PORT "ui_in[7]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "ui_in[6]" 25;
+IO_PORT "ui_in[6]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "ui_in[5]" 39;
+IO_PORT "ui_in[5]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "ui_in[4]" 36;
+IO_PORT "ui_in[4]" IO_TYPE=LVCMOS33;
+
+IO_LOC  "ui_in[3]" 37;
+IO_PORT "ui_in[3]" PULL_MODE=DOWN;
+
+IO_LOC  "ui_in[2]" 38;
+IO_PORT "ui_in[2]" PULL_MODE=UP;
+
+IO_LOC  "rst_n" 63;
+IO_PORT "rst_n" PULL_MODE=UP;
+
+IO_LOC  "uio_out[4]" 81;
+IO_PORT "uio_out[4]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
 
 IO_LOC  "clk" 52;
 IO_PORT "clk" IO_TYPE=LVCMOS33 PULL_MODE=UP;
 
-IO_LOC  "clockCheck" 82;
-IO_PORT "clockCheck" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+IO_LOC  "uio_out[5]" 82;
+IO_PORT "uio_out[5]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
 
-IO_LOC  "segments[0]" 77;
-IO_PORT "segments[0]" DRIVE=24 IO_TYPE=LVCMOS33;
+IO_LOC  "uo_out[0]" 77;
+IO_PORT "uo_out[0]" DRIVE=24 IO_TYPE=LVCMOS33;
 
-IO_LOC  "segments[1]" 76;
-IO_PORT "segments[1]" DRIVE=24 IO_TYPE=LVCMOS33;
+IO_LOC  "uo_out[1]" 76;
+IO_PORT "uo_out[1]" DRIVE=24 IO_TYPE=LVCMOS33;
 
-IO_LOC  "segments[2]" 75;
-IO_PORT "segments[2]" DRIVE=24 IO_TYPE=LVCMOS33;
+IO_LOC  "uo_out[2]" 75;
+IO_PORT "uo_out[2]" DRIVE=24 IO_TYPE=LVCMOS33;
 
-IO_LOC  "segments[3]" 74;
-IO_PORT "segments[3]" DRIVE=24 IO_TYPE=LVCMOS33;
+IO_LOC  "uo_out[3]" 74;
+IO_PORT "uo_out[3]" DRIVE=24 IO_TYPE=LVCMOS33;
 
-IO_LOC  "segments[4]" 73;
-IO_PORT "segments[4]" DRIVE=24 IO_TYPE=LVCMOS33;
+IO_LOC  "uo_out[4]" 73;
+IO_PORT "uo_out[4]" DRIVE=24 IO_TYPE=LVCMOS33;
 
-IO_LOC  "segments[5]" 72;
-IO_PORT "segments[5]" DRIVE=24 IO_TYPE=LVCMOS33;
+IO_LOC  "uo_out[5]" 72;
+IO_PORT "uo_out[5]" DRIVE=24 IO_TYPE=LVCMOS33;
 
-IO_LOC  "segments[6]" 71;
-IO_PORT "segments[6]" DRIVE=24 IO_TYPE=LVCMOS33;
+IO_LOC  "uo_out[6]" 71;
+IO_PORT "uo_out[6]" DRIVE=24 IO_TYPE=LVCMOS33;
 
-IO_LOC  "segments[7]" 70;
-IO_PORT "segments[7]" DRIVE=24 IO_TYPE=LVCMOS33;
+IO_LOC  "uo_out[7]" 70;
+IO_PORT "uo_out[7]" DRIVE=24 IO_TYPE=LVCMOS33;
 
-IO_LOC  "selector[0]" 86;
-IO_PORT "selector[0]" IO_TYPE=LVCMOS33;
+IO_LOC  "uio_out[0]" 86;
+IO_PORT "uio_out[0]" IO_TYPE=LVCMOS33;
 
-IO_LOC  "selector[1]" 85;
-IO_PORT "selector[1]" IO_TYPE=LVCMOS33;
+IO_LOC  "uio_out[1]" 85;
+IO_PORT "uio_out[1]" IO_TYPE=LVCMOS33;
 
-IO_LOC  "selector[2]" 84;
-IO_PORT "selector[2]" IO_TYPE=LVCMOS33;
+IO_LOC  "uio_out[2]" 84;
+IO_PORT "uio_out[2]" IO_TYPE=LVCMOS33;
 
-IO_LOC  "selector[3]" 83;
-IO_PORT "selector[3]" IO_TYPE=LVCMOS33;
+IO_LOC  "uio_out[3]" 83;
+IO_PORT "uio_out[3]" IO_TYPE=LVCMOS33;
 
-IO_LOC  "btn1" 3;
-IO_PORT "btn1" IO_TYPE=LVCMOS18;
+IO_LOC  "ui_in[0]" 3;
+IO_PORT "ui_in[0]" IO_TYPE=LVCMOS18;
 
-IO_LOC  "btn2" 4;
-IO_PORT "btn2" IO_TYPE=LVCMOS18;
+IO_LOC  "ui_in[1]" 4;
+IO_PORT "ui_in[1]" IO_TYPE=LVCMOS18;
