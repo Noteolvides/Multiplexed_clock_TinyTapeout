@@ -38,6 +38,8 @@ assign uio_out[2] = (negateSelector) ? ~selector_output[2] : selector_output[2];
 assign uio_out[3] = (negateSelector) ? ~selector_output[3] : selector_output[3];
 assign uio_out[4] = pulseSeconds;
 assign uio_out[5] = pulseMinutes;
+assign uio_out[6] = 0;
+assign uio_out[7] = 0;
 
 assign uo_out[0] = (negateSegments) ? ~segments[0] : segments[0];
 assign uo_out[1] = (negateSegments) ? ~segments[1] : segments[1];
