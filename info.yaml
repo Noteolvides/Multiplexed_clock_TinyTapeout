@@ -27,8 +27,8 @@ documentation:
 
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
-      Firt vhdl file created almost same code as mattvenn code to learn from it.
-      Its a clock counts seconds and then shows the hours and minutes in a 7 segment with 4 digits multiplexed. There is two buttons one for increase the hours and another to increase the minutes.
+      My first vhdl file created almost same code as mattvenn code to learn from it.
+      It is a clock that counts seconds and then shows the hours and minutes in a 7 segment with 4 digits multiplexed. There is two buttons one for increase the hours and another to increase the minutes.
 
 # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
   how_to_test:  |
