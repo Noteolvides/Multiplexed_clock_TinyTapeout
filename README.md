@@ -6,7 +6,9 @@
 ![Tang Nano Clock](https://github.com/Noteolvides/Noteolvides_clock_TinyTapeout/assets/28985425/04811332-4ded-41cd-818d-212c6237f6e6)
 
 
-https://github.com/Noteolvides/Noteolvides_clock_TinyTapeout/assets/28985425/7e7b379c-2dce-42c8-a21f-6fe6c386337e
+>Here in the video the clock was speeded 10%
+
+https://github.com/Noteolvides/Noteolvides_clock_TinyTapeout/assets/28985425/c1f09e6a-ff84-4910-b4ba-b7dd94319d81
 
 
 # How it works
