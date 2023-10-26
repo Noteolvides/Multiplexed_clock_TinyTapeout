@@ -1,19 +1,22 @@
 `default_nettype none
 
 module tang_nano (
-input wire [7 : 0] ui_in, // Dedicated inputs
-output wire [7 : 0] uo_out, // Dedicated outputs
-input wire [7 : 0] uio_in, // IOs : Input path
-output wire [7 : 0] uio_out, // IOs : Output path
-output wire [7 : 0] uio_oe, // IOs : Enable path (active high : 0 = input, 1 = output)
-input wire ena,
-input wire clk,
-input wire rst_n);
+    input  wire [7:0] ui_in,    // Dedicated inputs - connected to the input switches
+    output wire [7:0] uo_out,   // Dedicated outputs - connected to the 7 segment display
+    input  wire [7:0] uio_in,   // IOs: Bidirectional Input path
+    output wire [7:0] uio_out,  // IOs: Bidirectional Output path
+    output wire [7:0] uio_oe,   // IOs: Bidirectional Enable path (active high: 0=input, 1=output)
+    input  wire       ena,      // will go high when the design is enabled
+    input  wire       clk,      // clock
+    input  wire       rst_n     // reset_n - low to reset
+);
 
 //Frecuency for tang nano
 //localparam FRECUENCY = (27000000 + 253);
 //Frecuency for tinyTapeout
-localparam FRECUENCY = (32768);
+localparam FRECUENCY = (27000000 + 253);
+localparam MULTIPLEX_TIME = FRECUENCY/1000;
+localparam DEBOUNCE_TIME = MULTIPLEX_TIME*8;
 wire reset = !rst_n;
 assign uio_oe = 8'b11111111;
 
@@ -35,6 +38,8 @@ assign uio_out[2] = (negateSelector) ? ~selector_output[2] : selector_output[2];
 assign uio_out[3] = (negateSelector) ? ~selector_output[3] : selector_output[3];
 assign uio_out[4] = pulseSeconds;
 assign uio_out[5] = pulseMinutes;
+assign uio_out[6] = 0;
+assign uio_out[7] = 0;
 
 assign uo_out[0] = (negateSegments) ? ~segments[0] : segments[0];
 assign uo_out[1] = (negateSegments) ? ~segments[1] : segments[1];
@@ -47,18 +52,18 @@ assign uo_out[7] = (negateSegments) ? ~point_led : point_led;
 
 wire adj_min_pulse, adj_hrs_pulse;
 
-wire point_led;
-wire [6 : 0] segments;
+reg point_led;
+reg [6 : 0] segments;
 
-wire [3 : 0] bufferCounter;
-wire pulseSeconds;
-wire pulseMinutes;
+reg [3 : 0] bufferCounter;
+reg pulseSeconds;
+reg pulseMinutes;
 
 reg [3 : 0] min_u;
 reg [3 : 0] min_d;
 reg [3 : 0] hrs_u;
 reg [3 : 0] hrs_d;
-reg [4 : 0] time_leds;
+reg [3 : 0] time_leds;
 reg pressed_min;
 reg pressed_hrs;
 reg [25 : 0] clock_counter;
@@ -97,7 +102,7 @@ if (sec_counter == 60) begin
 	sec_counter <= 0;
 	time_leds <= 0;
 	min_u <= min_u + 1;
-	pulseMinutes = ~pulseMinutes;
+	pulseMinutes <= ~pulseMinutes;
 end
 
 if (min_u == 10) begin
@@ -115,7 +120,7 @@ if (hrs_u == 10) begin
 	hrs_d <= hrs_d + 1;
 end
 
-if (hrs_d == 2 & & hrs_u == 4) begin
+if (hrs_d == 2 && hrs_u == 4) begin
 	hrs_u <= 0;
 	hrs_d <= 0;
 end
@@ -124,32 +129,32 @@ clock_counter <= clock_counter + 1;
 if (clock_counter == FRECUENCY) begin
 	clock_counter <= 0;
 	sec_counter <= sec_counter + 1;
-	pulseSeconds = ~pulseSeconds;
+	pulseSeconds <= ~pulseSeconds;
 end
 
 millis_counter <= millis_counter + 1;
-if (millis_counter == (FRECUENCY/1000)) begin
+if (millis_counter == MULTIPLEX_TIME) begin
 	millis_counter <= 0;
 	selector_output <= (selector_output << 1) | (selector_output >> (4 - 1));
 end
 
-if (adj_min_pulse & & pressed_min == 0) begin
+if (adj_min_pulse && pressed_min == 0) begin
 	min_u <= min_u + 1;
 	pressed_min <= 1;
 	time_leds <= 0;
 	sec_counter <= 0;
 end
-else if (adj_min_pulse == 0 & & pressed_min == 1) begin
+else if (adj_min_pulse == 0 && pressed_min == 1) begin
 pressed_min <= 0;
 end
 
-if (adj_hrs_pulse & & pressed_hrs == 0) begin
+if (adj_hrs_pulse && pressed_hrs == 0) begin
 	hrs_u <= hrs_u + 1;
 	pressed_hrs <= 1;
 	time_leds <= 0;
 	sec_counter <= 0;
 end
-else if (adj_hrs_pulse == 0 & & pressed_hrs == 1) begin
+else if (adj_hrs_pulse == 0 && pressed_hrs == 1) begin
 pressed_hrs <= 0;
 end
 end
@@ -182,16 +187,16 @@ seg7 seg7(
 .segments(segments)
 );
 
-debouncer #((FRECUENCY/1000) * 8) minutes_increase(
+debouncer #(DEBOUNCE_TIME) minutes_increase(
 .clk(clk),
-.reset(0),
+.reset(reset),
 .in(!btn1),
 .out(adj_min_pulse)
 );
 
-debouncer #((FRECUENCY/1000) * 8) hours_increase(
+debouncer #(DEBOUNCE_TIME) hours_increase(
 .clk(clk),
-.reset(0),
+.reset(reset),
 .in(!btn2),
 .out(adj_hrs_pulse)
 );
@@ -230,10 +235,10 @@ input in,
 output out
 );
 
-reg [25 : 0] counter;
+reg [32 : 0] counter;
 
 always @(posedge clk) begin
-if (reset | | !in) begin
+if (reset || !in) begin
 	counter <= 0;
 end else begin
 if (counter < MAX_COUNT) begin
