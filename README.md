@@ -3,6 +3,11 @@
 
 >The code is ready to test in the Tang Nano, you have a branch already created for that called [tang_nano_development](https://github.com/Noteolvides/Noteolvides_clock_TinyTapeout/tree/tang_nano_development)
 
+![Tang Nano Clock](https://github.com/Noteolvides/Noteolvides_clock_TinyTapeout/assets/28985425/04811332-4ded-41cd-818d-212c6237f6e6)
+
+
+https://github.com/Noteolvides/Noteolvides_clock_TinyTapeout/assets/28985425/7e7b379c-2dce-42c8-a21f-6fe6c386337e
+
 
 # How it works
 Basically this is a clock that counts minutes shows the hours in the 24-hour format, it uses the dot in the 7 segments to indicate 15s 30s 45s and 60s respectibly.
