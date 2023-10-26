@@ -1,4 +1,4 @@
-
+![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg)
 >This is my first proyect in verilog so i have decided to do something simple and in future maybe i will try something harder! Half of the code if copied form Matt [code](https://github.com/mattvenn/tt04-vga-clock/blob/main/src/vga_clock.v).
 
 >The code is ready to test in the Tang Nano, you have a branch already created for that called [tang_nano_development](https://github.com/Noteolvides/Noteolvides_clock_TinyTapeout/tree/tang_nano_development)
