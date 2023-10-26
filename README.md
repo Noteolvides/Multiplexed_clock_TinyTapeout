@@ -1,36 +1,40 @@
-![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg)
 
-# What is Tiny Tapeout?
+>This is my first proyect in verilog so i have decided to do something simple and in future maybe i will try something harder! Half of the code if copied form Matt [code](https://github.com/mattvenn/tt04-vga-clock/blob/main/src/vga_clock.v).
 
-TinyTapeout is an educational project that aims to make it easier and cheaper than ever to get your digital designs manufactured on a real chip.
+>The code is ready to test in the Tang Nano, you have a branch already created for that called [tang_nano_development](https://github.com/Noteolvides/Noteolvides_clock_TinyTapeout/tree/tang_nano_development)
 
-To learn more and get started, visit https://tinytapeout.com.
 
-## Verilog Projects
+# How it works
+Basically this is a clock that counts minutes shows the hours in the 24-hour format, it uses the dot in the 7 segments to indicate 15s 30s 45s and 60s respectibly.
 
-Edit the [info.yaml](info.yaml) and uncomment the `source_files` and `top_module` properties, and change the value of `language` to "Verilog". Add your Verilog files to the `src` folder, and list them in the `source_files` property.
+```
+      -- 0 --         -- 0 --         -- 0 --         -- 0 --   
+     |       |       |       |       |       |       |       |  
+     5       1       5       1       5       1       5       1  
+     |       |       |       |       |       |       |       |  
+      -- 6 --         -- 6 --         -- 6 --         -- 6 --   
+     |       |       |       |       |       |       |       |  
+     4       2       4       2       4       2       4       2  
+     |       |       |       |       |       |       |       |  
+      -- 3 --  :60s   -- 3 --  :45s   -- 3 --  :30s   -- 3 --  :15s
+         ↑               ↑               ↑               ↑    
+      Hours H         Hours L         Minutes H       Minutes L
+     uio_out[3]      uio_out[2]       uio_out[1]      uio_out[0]     
+```
 
-The GitHub action will automatically build the ASIC files using [OpenLane](https://www.zerotoasiccourse.com/terminology/openlane/).
+[6:0] of the seven segments are connected to the **uo_out** output and the 7 bit is for the dot of the seven sevements.
+The digist are multiplexed, each digit is shown 1ms, those pins are **uio_out[3:0]** and **uio_out[5:4]** are used for debuging showing the clock of the seconds and minutes.
 
-## How to enable the GitHub actions to build the ASIC files
+For the test i have used [this 7 segment](https://www.tme.eu/es/details/kw4-804cgb/7-segment-led-displays/luckylight/?utm_campaign=compare-2019-08&utm_medium=cpc&utm_source=findchips.com) with common Cathode. But you can use which ever 7 segmnet display of 4 digits common or anode thats to the pins **ui_in[3:2]** with are use to negate the 7 segmetents or the multixplexing. 
 
-Please see the instructions for:
+Finally, **ui_in[1:0]** are used with a button to increase the hours or minutes.
 
-- [Enabling GitHub Actions](https://tinytapeout.com/faq/#when-i-commit-my-change-the-gds-action-isnt-running)
-- [Enabling GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part)
 
-## Resources
+# How to test 
+I have selected a clock 32,768khz because i thought it will be easy to buy a ready commponent that generates a squera wave with that frecuency, we will see about that :stuck_out_tongue_closed_eyes:.
+Just connect the 7 segments to the **uo_out** pins and select your configuration anode or catothe with the **ui_in[3]** pin.
+For the multiplexing connected uio_out[3:0] to the digits as show in how to use drawing.
 
-- [FAQ](https://tinytapeout.com/faq/)
-- [Digital design lessons](https://tinytapeout.com/digital_design/)
-- [Learn how semiconductors work](https://tinytapeout.com/siliwiz/)
-- [Join the community](https://discord.gg/rPK2nSjxy8)
+And finally if you want to increase the numbers connect a button pull up to the pins **ui_in[1:0]** to increase hours or minutes.
 
-## What next?
-
-- Submit your design to the next shuttle [on the website](https://tinytapeout.com/#submit-your-design). The closing date is **November 4th**.
-- Edit this [README](README.md) and explain your design, how it works, and how to test it.
-- Share your GDS on your social network of choice, tagging it #tinytapeout and linking Matt's profile:
-  - LinkedIn [#tinytapeout](https://www.linkedin.com/search/results/content/?keywords=%23tinytapeout) [matt-venn](https://www.linkedin.com/in/matt-venn/)
-  - Mastodon [#tinytapeout](https://chaos.social/tags/tinytapeout) [@matthewvenn](https://chaos.social/@matthewvenn)
-  - Twitter [#tinytapeout](https://twitter.com/hashtag/tinytapeout?src=hashtag_click) [@matthewvenn](https://twitter.com/matthewvenn)
+Generate a reset to start to init all the registers.
